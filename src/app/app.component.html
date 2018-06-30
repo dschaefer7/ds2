@@ -1,0 +1,9 @@
+<app-login *ngIf="!isAuthentificated()"></app-login>
+
+<app-invoice (callInvoicePdf)="onCallInvoicePdf()"  *ngIf="showInvoiceFormular()"></app-invoice>
+
+<app-invoice-pdf *ngIf="showInvoicePdf()"></app-invoice-pdf>
+
+
+<app-spinner [name]="spinner" [(show)]="showSpinner" class="spinner"></app-spinner>
+<!--<router-outlet></router-outlet>-->

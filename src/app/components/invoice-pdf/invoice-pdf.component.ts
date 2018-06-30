@@ -1,0 +1,69 @@
+import {Component, OnInit} from '@angular/core';
+import printJS from 'print-js';
+import {AuthService} from '../../services/auth.service';
+
+@Component({
+  selector: 'app-invoice-pdf',
+  templateUrl: './invoice-pdf.component.html',
+  styleUrls: ['./invoice-pdf.component.css']
+})
+export class InvoicePdfComponent {
+
+  // screen DPI / PDF DPI
+  // readonly dpiRatio = 96 / 72;
+
+  pdfSrc: any; // = 'http://localhost:10270/api/invoice';
+
+  constructor(private auth: AuthService) {
+    this.pdfSrc = auth.API_URL + '/invoice';
+  }
+
+  // private addInput(annotation: PDFAnnotationData, rect: number[] = null): void {
+  //   // add input to page
+  //   console.log(annotation);
+  // }
+  //
+  //
+  // loadComplete(pdf: PDFDocumentProxy): void {
+  //   for (let i = 1; i <= pdf.numPages; i++) {
+  //
+  //     // track the current page
+  //     let currentPage = null;
+  //     pdf.getPage(i).then(p => {
+  //       currentPage = p;
+  //
+  //       // get the annotations of the current page
+  //       return p.getAnnotations();
+  //     }).then(ann => {
+  //
+  //       // ugly cast due to missing typescript definitions
+  //       // please contribute to complete @types/pdfjs-dist
+  //       const annotations = (<any>ann) as PDFAnnotationData[];
+  //
+  //       annotations
+  //         .filter(a => a.subtype === 'Widget') // get the form field annotation only
+  //         .forEach(a => {
+  //
+  //           // get the rectangle that represent the single field
+  //           // and resize it according to the current DPI
+  //           const fieldRect = currentPage.getViewport(this.dpiRatio)
+  //             .convertToViewportRectangle(a.rect);
+  //
+  //           // add the corresponding input
+  //           this.addInput(a, fieldRect);
+  //         });
+  //     });
+  //   }
+  // }
+
+  printPdf() {
+    printJS({
+      printable: this.pdfSrc,
+      type: 'pdf',
+      showModal: true
+    });
+
+
+  }
+
+}

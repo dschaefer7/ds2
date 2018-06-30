@@ -1,0 +1,322 @@
+<div class="container mt-lg-3">
+
+  <h1>Vollmacht</h1>
+
+  <div class="row">
+    <div class="col-md-12">
+      <form #f="ngForm" (ngSubmit)="submit(f.value)">
+        <!--Address-->
+        <div class="form-group">
+          <label for="fullName">Name / Vorname oder Firma (zukünftige Halterin/Halter) Vollmachtgeber</label>
+          <input
+            required
+            type="text"
+            ngModel
+            name="fullName"
+            #fullName="ngModel"
+            class="form-control"
+            id="fullName"
+            aria-describedby="fullName"
+            placeholder="">
+          <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="StreetWithHouseNumber">Anschrift</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="StreetWithHouseNumber"
+                #StreetWithHouseNumber="ngModel"
+                class="form-control"
+                id="StreetWithHouseNumber"
+                aria-describedby="StreetWithHouseNumber"
+                placeholder="Straße und Hausnummer">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="postCode">Postleitzahl</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="postCode"
+                #postCode="ngModel"
+                class="form-control"
+                id="postCode"
+                aria-describedby="postCode"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="city">Ort</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="city"
+                #city="ngModel"
+                class="form-control"
+                id="city"
+                aria-describedby="city"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+        </div>
+
+
+        <!--kenzeichen-->
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="vehicleIdentNr">Fahrzeug-Ident-Nr</label>
+              <input
+                type="text"
+                ngModel
+                name="vehicleIdentNr"
+                #vehicleIdentNr="ngModel"
+                class="form-control"
+                id="vehicleIdentNr"
+                aria-describedby="vehicleIdentNr"
+                placeholder="">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="currentPlatte">Kennzeichen des Fahrzeuges</label>
+              <input
+                type="text"
+                ngModel
+                name="currentPlatte"
+                #currentPlatte="ngModel"
+                class="form-control"
+                id="currentPlatte"
+                aria-describedby="currentPlatte"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+        </div>
+
+        <!--wishplatte-->
+        <div class="row mt-lg-3">
+          <!--<div class="col-md-3">-->
+          <!--<span class="head1">Wunschkennzeichen:</span>-->
+          <!--</div>-->
+          <!-- /.col-md-3 -->
+
+          <div class="col-md-3 align-self-center">
+
+            <span class="mr-3 font-weight-bold">Wunschkennzeichen:</span>
+
+            <!--<div class="form-check form-check-inline">-->
+            <!--<input class="form-check-input"  name="wishPlatte" type="radio" id="wishPlatteJa" value="1">-->
+            <!--<label class="form-check-label" for="wishPlatteJa">ja</label>-->
+            <!--</div>-->
+            <!--<div class="form-check form-check-inline">-->
+            <!--<input class="form-check-input" name="wishPlatte" type="radio" id="wishPlatteNein" value="0">-->
+            <!--<label class="form-check-label" for="wishPlatteNein">nein</label>-->
+            <!--</div>-->
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="wishPlatte"></label>
+              <input
+                type="text"
+                ngModel
+                name="wishPlatte"
+                #wishPlatte="ngModel"
+                class="form-control"
+                id="wishPlatte"
+                aria-describedby="wishPlatte"
+                placeholder="Wunschkennzeichen eintragen">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+        </div>
+
+        <!--plakette-->
+        <div class="row mt-lg-3">
+          <div class="col-md-6">
+
+            <span class="mr-3 font-weight-bold">Feinstaubplakette:</span>
+
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" ngModel name="IsWishPlakette" type="radio" id="IsWishPlaketteJa" value="1">
+              <label class="form-check-label" for="IsWishPlaketteJa">ja</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" ngModel name="IsWishPlakette" type="radio" id="IsWishPlaketteNein" value="0">
+              <label class="form-check-label" for="IsWishPlaketteNein">nein</label>
+            </div>
+          </div>
+        </div>
+
+        <!--evb-->
+        <div class="row mt-lg-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="evb">EVB Nr.</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="evb"
+                #evb="ngModel"
+                class="form-control"
+                id="evb"
+                aria-describedby="evb"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+        </div>
+        <!--contact Phone-->
+        <div class="row mt-lg-3">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ContactPhone">Telefonnummer für den Zulassungsdienst, falls weitere Unterlagen benötigt werden.</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="ContactPhone"
+                #ContactPhone="ngModel"
+                class="form-control"
+                id="ContactPhone"
+                aria-describedby="ContactPhone"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+        </div>
+
+        <h2>für SEPA - Lastschriftmandat zum Einzug der Kraftfahrzeugsteuer</h2>
+
+        <!--IBAN-->
+        <div class="row mt-lg-3">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="IBAN">IBAN</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="IBAN"
+                #IBAN="ngModel"
+                class="form-control"
+                id="IBAN"
+                aria-describedby="IBAN"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+        </div>
+        <!--BIC-->
+        <div class="row mt-lg-0">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="BIC">BIC</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="BIC"
+                #BIC="ngModel"
+                class="form-control"
+                id="BIC"
+                aria-describedby="BIC"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="bankName">Name der Bank</label>
+              <input
+                required
+                type="text"
+                ngModel
+                name="bankName"
+                #bankName="ngModel"
+                class="form-control"
+                id="bankName"
+                aria-describedby="bankName"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+          </div>
+        </div>
+
+      <h2>Rechnung</h2>
+
+        <div class="form-group row">
+          <label for="vorauslegteKosten" class="col-sm-3 col-form-label">Vorauslegte Kosten</label>
+          <div class="col-sm-2">
+            <input type="number"
+                   required
+                   ngModel
+                   name="vorauslegteKosten"
+                   #vorauslegteKosten="ngModel"
+                   class="form-control"
+                   id="vorauslegteKosten"
+                   placeholder="">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="zulassungsserviceKosten" class="col-sm-3 col-form-label">Zulassungsservice Kosten</label>
+          <div class="col-sm-2">
+            <input type="number"
+                   required
+                   ngModel
+                   name="zulassungsserviceKosten"
+                   #zulassungsserviceKosten="ngModel"
+                   class="form-control"
+                   id="zulassungsserviceKosten"
+                   placeholder="">
+          </div>
+        </div>
+
+        <div class="row mt-lg-3">
+          <div class="col-md-6">
+
+            <span class="mr-3 font-weight-bold">Kennzeichen:</span>
+
+            <div class="form-check form-check-inline">
+              <input required class="form-check-input" ngModel name="kennzechenKosten" type="radio" id="kennzeichenJa" value="1">
+              <label class="form-check-label" for="kennzeichenJa">ja</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input required class="form-check-input" ngModel name="kennzechenKosten" type="radio" id="kennzeichenNein" value="0">
+              <label class="form-check-label" for="kennzeichenNein">nein</label>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="mt-lg-5"><p>
+          {{f.value| json}}
+        </p></div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+</div>
