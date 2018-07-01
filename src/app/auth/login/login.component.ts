@@ -33,8 +33,11 @@ export class LoginComponent implements OnInit {
   }
 
   async login() {
-    if(this.form.errors){
-      console.log("-----erorrs----");
+    console.log(this.form);
+    if(this.form.invalid) {
+      this.form.setErrors({
+        invalidLogin: true
+      });
       return;
     }
     this.showSpinner = true;

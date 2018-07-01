@@ -100,7 +100,8 @@
       </svg>
     </div>
   </div>
-
+  <div *ngIf="form.errors"
+       class="alert alert-danger">Überprüfen Sie bitte Ihre Eingaben</div>
   <div class="inputGroup inputGroup1">
     <label for="loginEmail" id="loginEmailLabel">Username</label>
     <input type="text" id="loginEmail" name="email" formControlName="email"/>
