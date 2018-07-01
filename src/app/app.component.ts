@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {SpinnerService} from './components/spinner/spinner.service';
+import fontawesome from '@fortawesome/fontawesome';
+import faSpinner from '@fortawesome/fontawesome-free-solid/';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,7 @@ export class AppComponent {
   isShowInfoicePdf = false;
 
   constructor(private auth: AuthService, public spinner: SpinnerService) {
+    fontawesome.library.add(faSpinner);
   }
 
 

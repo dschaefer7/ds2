@@ -16,17 +16,18 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              public spinnerLogin: SpinnerService
+              public spinner: SpinnerService
   ) {
-
+    this.spinner.show('spinnerLogin');
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  login() {
+  async login() {
     this.showSpinner = true;
+    await this.delay(5000);
     const val = this.form.value;
     if (val.email && val.password) {
       this.authService.login(val.email, val.password);
@@ -53,6 +54,10 @@ export class LoginComponent implements OnInit {
     script.async = false;
     // script.defer = true;
     return document.body.appendChild(script);
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 
