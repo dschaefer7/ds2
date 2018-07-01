@@ -104,11 +104,16 @@
   <div class="inputGroup inputGroup1">
     <label for="loginEmail" id="loginEmailLabel">Username</label>
     <input type="text" id="loginEmail" name="email" formControlName="email"/>
+    <div *ngIf="username.touched
+             && username.invalid"
+         class="alert alert-danger">Geben Sie bitte Username</div>
     <!--<p class="helper helper1">email@domain.com</p>-->
   </div>
   <div class="inputGroup inputGroup2">
     <label for="loginPassword" id="loginPasswordLabel">Password</label>
     <input type="password" id="loginPassword" name="password" formControlName="password"/>
+    <div *ngIf="password.touched
+             && password.invalid"  class="alert alert-danger">Geben Sie bitte Password</div>
     <label id="showPasswordToggle" for="showPasswordCheck">Show
       <input id="showPasswordCheck" type="checkbox"/>
       <div class="indicator"></div>

@@ -16,8 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              public spinner: SpinnerService
-  ) {
+              public spinner: SpinnerService) {
     this.spinner.show('spinnerLogin');
     this.form = this.fb.group({
       email: ['', Validators.required],
@@ -25,9 +24,21 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get username() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
+
   async login() {
+    if(this.form.errors){
+      console.log("-----erorrs----");
+      return;
+    }
     this.showSpinner = true;
-    await this.delay(5000);
+    await this.delay(1000);
     const val = this.form.value;
     if (val.email && val.password) {
       this.authService.login(val.email, val.password);
@@ -48,16 +59,16 @@ export class LoginComponent implements OnInit {
     this.addDynamicJS('/assets/js/login.js');
   }
 
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   private addDynamicJS(myScript: string): HTMLElement {
     const script = document.createElement('script');
     script.src = myScript;
     script.async = false;
     // script.defer = true;
     return document.body.appendChild(script);
-  }
-
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 
