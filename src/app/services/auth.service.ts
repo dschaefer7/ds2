@@ -9,8 +9,8 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-  API_URL = 'https://zulassungsdienst-express.de/api';
-  // API_URL = 'http://localhost:10270/api';
+  // API_URL = 'https://zulassungsdienst-express.de/api';
+   API_URL = 'http://localhost:10270/api';
   TOKEN_KEY = 'auth_token';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) {

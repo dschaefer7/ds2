@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   async login() {
     console.log(this.form);
-    if(this.form.invalid) {
+    if (this.form.invalid) {
       this.form.setErrors({
         invalidLogin: true
       });
@@ -49,11 +49,11 @@ export class LoginComponent implements OnInit {
     this.showSpinner = false;
   }
 
-  getValue() {
-    this.authService.getValue()
-      .subscribe((data) => console.log(data)
-      );
-  }
+  // getValue() {
+  //   this.authService.getValue()
+  //     .subscribe((data) => console.log(data)
+  //     );
+  // }
 
 
   ngOnInit() {

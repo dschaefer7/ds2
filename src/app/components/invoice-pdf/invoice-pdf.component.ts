@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import printJS from 'print-js';
 import {AuthService} from '../../services/auth.service';
+import {InvoiceService} from '../../services/invoice.service';
+import {OrderService} from '../../services/order.service';
 
 @Component({
   selector: 'app-invoice-pdf',
@@ -14,8 +16,16 @@ export class InvoicePdfComponent {
 
   pdfSrc: any; // = 'http://localhost:10270/api/invoice';
 
-  constructor(private auth: AuthService) {
-    this.pdfSrc = auth.API_URL + '/invoice';
+  constructor(private auth: AuthService,
+              private invoiceService: InvoiceService,
+              private orderService: OrderService) {
+    // this.pdfSrc = auth.API_URL + '/invoice';
+    const orderData = orderService.order;
+    invoiceService.createInvoice(orderData)
+      .subscribe((data: any) => {
+        console.log('data', data);
+        this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
+      });
   }
 
   // private addInput(annotation: PDFAnnotationData, rect: number[] = null): void {

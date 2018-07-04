@@ -15,7 +15,7 @@ export class InvoiceService {
 
 
   createInvoice(orderData) {
-    return this.http.post(this.API_URL + '/order', orderData);
+    return this.http.post(this.API_URL + '/invoice', null);
   }
 
 

@@ -16,9 +16,9 @@ export class InvoiceComponent {
 
   submit(form) {
     this.orderService.createOrder(form)
-      .subscribe((data) => {
+      .subscribe((order: any) => {
+        this.orderService.order = order;
         this.callInvoicePdf.emit();
-        console.log();
       });
     console.log(form);
   }

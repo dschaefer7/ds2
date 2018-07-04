@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 export class OrderService {
 
   API_URL: string;
+  order: any;
 
   constructor(private auth: AuthService, private http: HttpClient) {
     this.API_URL = auth.API_URL;
