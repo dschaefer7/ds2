@@ -3,6 +3,7 @@ import printJS from 'print-js';
 import {AuthService} from '../../services/auth.service';
 import {InvoiceService} from '../../services/invoice.service';
 import {OrderService} from '../../services/order.service';
+import b64toBlob from 'b64-to-blob';
 
 @Component({
   selector: 'app-invoice-pdf',
@@ -15,18 +16,21 @@ export class InvoicePdfComponent {
   // readonly dpiRatio = 96 / 72;
 
   pdfSrc: any; // = 'http://localhost:10270/api/invoice';
+  pdfScr2: any;
 
   constructor(private auth: AuthService,
               private invoiceService: InvoiceService,
               private orderService: OrderService) {
     // this.pdfSrc = auth.API_URL + '/invoice';
-    const orderData = orderService.order;
-    invoiceService.createInvoice(orderData)
+    console.log('this.orderService.order', this.orderService.order);
+    invoiceService.createInvoice(this.orderService.order)
       .subscribe((data: any) => {
         console.log('data', data);
         this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
+        this.pdfScr2 = data.pdf;
       });
   }
+
 
   // private addInput(annotation: PDFAnnotationData, rect: number[] = null): void {
   //   // add input to page
@@ -68,12 +72,37 @@ export class InvoicePdfComponent {
 
   printPdf() {
     printJS({
-      printable: this.pdfSrc,
+      printable: this.auth.API_URL + '/invoice',
       type: 'pdf',
-      showModal: true
+      showModal: true,
+      token: this.auth.token
     });
 
+    // const blob = this.b64toBlob(this.pdfScr2, 'application/pdf');
+    // let blob = b64toBlob(this.pdfScr2, 'application/pdf');
+    // let fileUrl = window.URL.createObjectURL(blob);
+    // window.frames['my-frame'].src = fileUrl;
+    // window.frames['my-frame'].print();
+  }
 
+  b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
   }
 
 }
