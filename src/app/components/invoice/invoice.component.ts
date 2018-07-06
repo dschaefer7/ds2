@@ -10,19 +10,27 @@ export class InvoiceComponent {
 
   @Output() callInvoicePdf = new EventEmitter();
 
+  order: any = {};
+
   constructor(private orderService: OrderService) {
+
+    console.log('---',orderService.form);
+
+    if (orderService.form) {
+      this.order = orderService.order;
+    }
   }
 
 
   submit(form) {
     this.orderService.createOrder(form)
       .subscribe((order: any) => {
-        //this.orderService.orderId = order.orderId;
-         this.orderService.order = {orderId: order.orderId};
-         console.log(this.orderService.order);
+        this.orderService.order = {orderId: order.orderId};
         this.callInvoicePdf.emit();
       });
-    console.log(form);
+    this.orderService.form = this.order;
+    console.log(this.order);
+    // console.log(form);
   }
 
 }

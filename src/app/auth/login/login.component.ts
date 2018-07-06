@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               public spinner: SpinnerService) {
-    this.spinner.show('spinnerLogin');
+    // this.spinnerLogin.show('spinnerLogin');
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     return this.form.get('password');
   }
 
-  async login() {
+  login() {
     console.log(this.form);
     if (this.form.invalid) {
       this.form.setErrors({
@@ -41,12 +41,26 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.showSpinner = true;
-    await this.delay(1000);
+    // await this.delay(1000);
     const val = this.form.value;
     if (val.email && val.password) {
-      this.authService.login(val.email, val.password);
+      this.authService.login(val.email, val.password)
+        .subscribe((isLogged) => {
+            // if (!isLogged) {
+            //   this.form.setErrors({
+            //     invalidLogin: true
+            //   });
+            // }
+            this.showSpinner = false;
+          },
+          (error) => {
+            this.form.setErrors({
+              invalidLogin: true
+            });
+            this.showSpinner = false;
+          }
+        );
     }
-    this.showSpinner = false;
   }
 
   // getValue() {

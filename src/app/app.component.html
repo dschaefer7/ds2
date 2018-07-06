@@ -1,9 +1,17 @@
-<app-login *ngIf="!isAuthentificated()"></app-login>
-
-<app-invoice (callInvoicePdf)="onCallInvoicePdf()"  *ngIf="showInvoiceFormular()"></app-invoice>
-
-<app-invoice-pdf *ngIf="showInvoicePdf()"></app-invoice-pdf>
 
 
-<app-spinner [name]="spinner" [(show)]="showSpinner" class="spinner"></app-spinner>
-<!--<router-outlet></router-outlet>-->
+  <!--<div class="row">-->
+    <!--<div class="col-md-2 mt-lg-5">-->
+      <!--<button class="btn btn-success btn-lg"> Estelle PDF</button>-->
+    <!--</div>-->
+    <!-- /.col-md-2 -->
+
+    <!--<div class="col-md-10">-->
+      <app-login *ngIf="!isAuthentificated()"></app-login>
+      <app-invoice (callInvoicePdf)="onCallInvoicePdf()" *ngIf="showInvoiceFormular()"></app-invoice>
+      <app-invoice-pdf (callInvoiceForm)="onCallInvoiceForm()" *ngIf="showInvoicePdf()"></app-invoice-pdf>
+    <!--</div>-->
+  <!--</div>-->
+
+  <app-spinner [name]="spinner" [(show)]="showSpinner" class="spinner"></app-spinner>
+  <!--<router-outlet></router-outlet>-->

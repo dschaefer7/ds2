@@ -11,7 +11,7 @@
           <input
             required
             type="text"
-            ngModel
+            [(ngModel)]="order.fullName"
             name="fullName"
             #fullName="ngModel"
             class="form-control"
@@ -28,7 +28,7 @@
               <input
                 required
                 type="text"
-                ngModel
+                [(ngModel)]="order.StreetWithHouseNumber"
                 name="StreetWithHouseNumber"
                 #StreetWithHouseNumber="ngModel"
                 class="form-control"
@@ -43,7 +43,7 @@
               <input
                 required
                 type="text"
-                ngModel
+                [(ngModel)]="order.postCode"
                 name="postCode"
                 #postCode="ngModel"
                 class="form-control"
@@ -59,7 +59,7 @@
               <input
                 required
                 type="text"
-                ngModel
+                [(ngModel)]="order.city"
                 name="city"
                 #city="ngModel"
                 class="form-control"
@@ -79,7 +79,7 @@
               <label for="vehicleIdentNr">Fahrzeug-Ident-Nr</label>
               <input
                 type="text"
-                ngModel
+                [(ngModel)]="order.vehicleIdentNr"
                 name="vehicleIdentNr"
                 #vehicleIdentNr="ngModel"
                 class="form-control"
@@ -93,7 +93,7 @@
               <label for="currentPlatte">Kennzeichen des Fahrzeuges</label>
               <input
                 type="text"
-                ngModel
+                [(ngModel)]="order.currentPlatte"
                 name="currentPlatte"
                 #currentPlatte="ngModel"
                 class="form-control"
@@ -131,7 +131,7 @@
               <label for="wishPlatte"></label>
               <input
                 type="text"
-                ngModel
+                [(ngModel)]="order.wishPlatte"
                 name="wishPlatte"
                 #wishPlatte="ngModel"
                 class="form-control"
@@ -150,11 +150,17 @@
             <span class="mr-3 font-weight-bold">Feinstaubplakette:</span>
 
             <div class="form-check form-check-inline">
-              <input class="form-check-input" ngModel name="IsWishPlakette" type="radio" id="IsWishPlaketteJa" value="1">
+              <input class="form-check-input"
+                     [(ngModel)]="order.IsWishPlakette"
+                     name="IsWishPlakette"
+                     type="radio" id="IsWishPlaketteJa" value="1">
               <label class="form-check-label" for="IsWishPlaketteJa">ja</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" ngModel name="IsWishPlakette" type="radio" id="IsWishPlaketteNein" value="0">
+              <input class="form-check-input"
+                     [(ngModel)]="order.IsWishPlakette"
+                     name="IsWishPlakette"
+                     type="radio" id="IsWishPlaketteNein" value="0">
               <label class="form-check-label" for="IsWishPlaketteNein">nein</label>
             </div>
           </div>
@@ -168,7 +174,7 @@
               <input
                 required
                 type="text"
-                ngModel
+                [(ngModel)]="order.evb"
                 name="evb"
                 #evb="ngModel"
                 class="form-control"
@@ -187,7 +193,7 @@
               <input
                 required
                 type="text"
-                ngModel
+                [(ngModel)]="order.ContactPhone"
                 name="ContactPhone"
                 #ContactPhone="ngModel"
                 class="form-control"
@@ -228,7 +234,7 @@
               <input
                 required
                 type="text"
-                ngModel
+                [(ngModel)]="order.BIC"
                 name="BIC"
                 #BIC="ngModel"
                 class="form-control"
@@ -244,7 +250,7 @@
               <input
                 required
                 type="text"
-                ngModel
+                [(ngModel)]="order.bankName"
                 name="bankName"
                 #bankName="ngModel"
                 class="form-control"
@@ -259,11 +265,11 @@
       <h2>Rechnung</h2>
 
         <div class="form-group row">
-          <label for="vorauslegteKosten" class="col-sm-3 col-form-label">Vorauslegte Kosten</label>
+          <label for="vorauslegteKosten" class="col-sm-3 col-form-label">Vorgelegte Kosten</label>
           <div class="col-sm-2">
             <input type="number"
                    required
-                   ngModel
+                   [(ngModel)]="order.vorauslegteKosten"
                    name="vorauslegteKosten"
                    #vorauslegteKosten="ngModel"
                    class="form-control"
@@ -277,7 +283,7 @@
           <div class="col-sm-2">
             <input type="number"
                    required
-                   ngModel
+                   [(ngModel)]="order.zulassungsserviceKosten"
                    name="zulassungsserviceKosten"
                    #zulassungsserviceKosten="ngModel"
                    class="form-control"
@@ -286,37 +292,39 @@
           </div>
         </div>
 
-        <div class="row mt-lg-3">
+        <div class="row mt-lg-5">
           <div class="col-md-6">
-
             <span class="mr-3 font-weight-bold">Kennzeichen:</span>
-
             <div class="form-check form-check-inline">
-              <input required class="form-check-input" ngModel name="kennzechenKosten" type="radio" id="kennzeichenJa" value="1">
+              <input class="form-check-input"
+                     [(ngModel)]="order.kennzechenKosten"
+                     name="kennzechenKosten"
+                     type="radio" id="kennzeichenJa" value="1">
               <label class="form-check-label" for="kennzeichenJa">ja</label>
             </div>
             <div class="form-check form-check-inline">
-              <input required class="form-check-input" ngModel name="kennzechenKosten" type="radio" id="kennzeichenNein" value="0">
+              <input class="form-check-input"
+                     [(ngModel)]="order.kennzechenKosten"
+                     name="kennzechenKosten"
+                     type="radio" id="kennzeichenNein" value="0">
               <label class="form-check-label" for="kennzeichenNein">nein</label>
             </div>
           </div>
         </div>
 
 
+        <!--<div class="mt-lg-5"><p>-->
+          <!--{{f.value| json}}-->
+        <!--</p></div>-->
+        <div class="row mt-lg-5">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-danger btn-lg float-right">Erstelle Dokumente</button>
+          </div>
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
 
-
-
-
-        <div class="mt-lg-5"><p>
-          {{f.value| json}}
-        </p></div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </div>
   </div>
-
-
-
-
 </div>

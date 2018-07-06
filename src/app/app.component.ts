@@ -49,4 +49,8 @@ export class AppComponent {
     return this.auth.isAuthenticated && this.isShowInfoicePdf;
   }
 
+  onCallInvoiceForm() {
+    this.isShowInvoiceFormular = true;
+    this.isShowInfoicePdf = false;
+  }
 }

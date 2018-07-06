@@ -3,17 +3,19 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-   API_URL = 'https://zulassungsdienst-express.de/api';
-   //API_URL = 'http://localhost:10270/api';
+  API_URL = environment.API_URL;
+  // API_URL = 'https://zulassungsdienst-express.de/api';
+  // API_URL = 'http://localhost:10270/api';
   TOKEN_KEY = 'auth_token';
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) {
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
   }
 
   get token() {
@@ -37,7 +39,7 @@ export class AuthService {
     // this.router.navigateByUrl('/');
   }
 
-  login(username: string, pass: string) {
+  login(username: string, pass: string): Observable<boolean> {
     const headers = {
       headers: new HttpHeaders({'Content-Type': 'application/json', 'Cache-Control': 'no-cache'})
     };
@@ -45,12 +47,20 @@ export class AuthService {
       username: username,
       password: pass
     };
-    this.http.post(this.API_URL + '/login', data, headers).subscribe(
-      (res: any) => {
-        localStorage.setItem(this.TOKEN_KEY, res.token);
-        // console.log(res);
-
-        //this.router.navigateByUrl('/invoice');
+    return new Observable<boolean>(
+      (observer) => {
+        this.http.post(this.API_URL + '/login', data, headers)
+          .subscribe(
+            (res: any) => {
+              localStorage.setItem(this.TOKEN_KEY, res.token);
+              // console.log(res);
+              // this.router.navigateByUrl('/invoice');
+              observer.next(true);
+            },
+            (error) => {
+              observer.error(error);
+            }
+          );
       }
     );
   }

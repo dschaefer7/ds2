@@ -44,10 +44,10 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
       }
     }),
 
-    RouterModule.forRoot([
-      {path: 'login', component: LoginComponent},
-      {path: 'invoice', component: InvoiceComponent, canActivate: [AuthGuard]}
-    ])
+    // RouterModule.forRoot([
+    //   {path: 'login', component: LoginComponent},
+    //   {path: 'invoice', component: InvoiceComponent, canActivate: [AuthGuard]}
+    // ])
   ],
   providers: [],
   bootstrap: [AppComponent]

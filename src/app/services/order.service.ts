@@ -10,6 +10,7 @@ export class OrderService {
 
   API_URL: string;
   order: Order;
+  form: any;
 
   constructor(private auth: AuthService, private http: HttpClient) {
     this.API_URL = auth.API_URL;

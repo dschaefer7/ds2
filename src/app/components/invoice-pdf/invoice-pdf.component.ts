@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import printJS from 'print-js';
 import {AuthService} from '../../services/auth.service';
 import {InvoiceService} from '../../services/invoice.service';
 import {OrderService} from '../../services/order.service';
-import b64toBlob from 'b64-to-blob';
 
 @Component({
   selector: 'app-invoice-pdf',
@@ -12,11 +11,9 @@ import b64toBlob from 'b64-to-blob';
 })
 export class InvoicePdfComponent {
 
-  // screen DPI / PDF DPI
-  // readonly dpiRatio = 96 / 72;
+  @Output() callInvoiceForm = new EventEmitter();
 
   pdfSrc: any; // = 'http://localhost:10270/api/invoice';
-  pdfScr2: any;
 
   constructor(private auth: AuthService,
               private invoiceService: InvoiceService,
@@ -27,7 +24,6 @@ export class InvoicePdfComponent {
       .subscribe((data: any) => {
         console.log('data', data);
         this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
-        this.pdfScr2 = data.pdf;
       });
   }
 
@@ -85,24 +81,7 @@ export class InvoicePdfComponent {
     // window.frames['my-frame'].print();
   }
 
-  b64toBlob(b64Data, contentType = '', sliceSize = 512) {
-    const byteCharacters = atob(b64Data);
-    const byteArrays = [];
-
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-
-    const blob = new Blob(byteArrays, {type: contentType});
-    return blob;
+  backToInvoiceComponent() {
+    this.callInvoiceForm.emit();
   }
-
 }
