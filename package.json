@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "server2": "json-server --watch db.json --port=10270 --routes routes.json --middlewares ./json-server-middle.js",
+    "server": "node ./server.js",
+    "dev": "concurrently --kill-others \"npm run start\" \"npm run server\" "
   },
   "private": true,
   "dependencies": {
@@ -41,8 +44,10 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "concurrently": "^3.6.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
+    "json-server": "^0.14.0",
     "karma": "^2.0.4",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~1.4.2",

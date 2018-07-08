@@ -10,14 +10,12 @@ export class InvoiceComponent {
 
   @Output() callInvoicePdf = new EventEmitter();
 
-  order: any = {};
+  public order: any = {};
 
   constructor(private orderService: OrderService) {
-
-    console.log('---',orderService.form);
-
+    console.log('---', orderService.form);
     if (orderService.form) {
-      this.order = orderService.order;
+      this.order = orderService.form;
     }
   }
 

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:10270/api'
+  //API_URL: 'http://localhost:10270/api'
+  API_URL: 'https://zulassungsdienst-express.de/api'
 };
 
 /*

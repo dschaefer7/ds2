@@ -1,0 +1,52 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "login": {
+    "createdAt": 1531060705697
+  },
+  "images": [
+    {
+      "id": 1,
+      "sonum": "1",
+      "imageExist": "true",
+      "sapArticleNumber": "1000",
+      "src": "https://scontent-frt3-2.cdninstagram.com/vp/482959f0f51da48f50d25f7319cb35f2/5BA1BDD2/t51.2885-15/sh0.08/e35/p640x640/31065280_1443804559098623_3432817903420833792_n.jpg"
+    },
+    {
+      "id": 2,
+      "sonum": "2",
+      "imageExist": "true",
+      "sapArticleNumber": "1001",
+      "src": "https://scontent-frt3-2.cdninstagram.com/vp/5c669e542e03f0e784f165e709c486b7/5B858B4C/t51.2885-15/sh0.08/e35/p640x640/31738660_413105469155101_1125440160658358272_n.jpg"
+    },
+    {
+      "id": 3,
+      "sonum": "8484180000010",
+      "imageExist": "true",
+      "sapArticleNumber": "1001",
+      "src": "https://scontent-frt3-2.cdninstagram.com/vp/ed643420d71465808a196becf916f3f2/5B9429DF/t51.2885-15/e35/22429690_752170254993868_229507268293427200_n.jpg"
+    },
+    {
+      "id": 4,
+      "sonum": "4",
+      "imageExist": "true",
+      "sapArticleNumber": "1001",
+      "src": "http://172.16.100.175:8180/api/v1/mapping/image"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
