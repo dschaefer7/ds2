@@ -21,5 +21,9 @@ export class OrderService {
     return this.http.post(this.API_URL + '/order', orderData);
   }
 
+  getAllOrders(){
+    return this.http.get(this.API_URL + '/order');
+  }
+
 
 }

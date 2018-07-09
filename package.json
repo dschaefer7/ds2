@@ -31,6 +31,7 @@
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
     "ng2-pdf-viewer": "^5.1.0",
+    "ngx-order-pipe": "^2.0.1",
     "print-js": "dschaefer7/Print.js",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
