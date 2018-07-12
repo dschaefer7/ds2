@@ -5,25 +5,29 @@
       <button (click)="showAllOrders()" class="btn btn-success btn-lg align-left">Alle Bestellungen</button>
     </div>
     <div *ngIf="!showOrderForm" class="col-md-10">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>BestellNr</th>
-        <th>Name</th>
-        <th>Eingangsdatum</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let o of orders$ | async">
-        <td>{{o.OrderId}}</td>
-        <td>{{o.CustomerFullName}}</td>
-        <td>{{o.DateCreated}}</td>
-      </tr>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>BestellNr</th>
+          <th>Name</th>
+          <th>Eingangsdatum</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let o of orders">
+          <td>{{o.OrderId}}</td>
+          <td>{{o.CustomerFullName}}</td>
+          <td>{{o.DateCreated | date}}</td>
+          <td>
+            <button type="button" class="btn btn-outline-primary" (click)="deleteOrder(o.OrderId)">
+              <i class="fas fa-trash-alt red"></i>
+            </button>
+          </td>
+        </tr>
 
-      </tbody>
-    </table>
+        </tbody>
+      </table>
     </div>
-
 
 
     <div *ngIf="showOrderForm" class="col-md-10">

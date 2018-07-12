@@ -12,7 +12,7 @@ export class InvoiceComponent {
   @Output() callInvoicePdf = new EventEmitter();
 
   public order: any = {};
-  orders$;
+  orders;
   showOrderForm = true;
   showSpinner = false;
 
@@ -39,10 +39,25 @@ export class InvoiceComponent {
   }
 
   showAllOrders() {
+    this.showSpinner = true;
     this.showOrderForm = false;
-    this.orders$ = this.orderService.getAllOrders();
-    //   .subscribe((orders: any) => {
-    //   this.orders = orders;
-    // });
+    this.orderService.getAllOrders()
+      .subscribe((orders: any) => {
+        this.orders = orders;
+        console.log(orders);
+
+        this.showSpinner = false;
+      });
+  }
+
+  deleteOrder(orderId) {
+    this.orderService.deleteOrder(orderId)
+      .subscribe((order: any) => {
+        this.orders.splice(this.orders.findIndex(function (i) {
+          return i.OrderId === orderId;
+        }), 1);
+
+        console.log('deletedOrder', order);
+      });
   }
 }

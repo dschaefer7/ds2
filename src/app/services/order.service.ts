@@ -21,8 +21,12 @@ export class OrderService {
     return this.http.post(this.API_URL + '/order', orderData);
   }
 
-  getAllOrders(){
+  getAllOrders() {
     return this.http.get(this.API_URL + '/order');
+  }
+
+  deleteOrder(orderId) {
+    return this.http.delete(this.API_URL + '/order/' + orderId);
   }
 
 

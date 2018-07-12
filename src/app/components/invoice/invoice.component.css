@@ -2,3 +2,10 @@
   font-size: 1.5rem;
   vertical-align: center;
 }
+
+.red{
+  color: red;
+}
+button:hover{
+  cursor: pointer;
+}
