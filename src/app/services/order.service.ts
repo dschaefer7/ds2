@@ -25,6 +25,10 @@ export class OrderService {
     return this.http.get(this.API_URL + '/order');
   }
 
+  getOrderById(orderId) {
+    return this.http.get(this.API_URL + '/order/' + orderId);
+  }
+
   deleteOrder(orderId) {
     return this.http.delete(this.API_URL + '/order/' + orderId);
   }

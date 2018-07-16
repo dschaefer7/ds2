@@ -19,7 +19,10 @@
           <td>{{o.CustomerFullName}}</td>
           <td>{{o.DateCreated | date}}</td>
           <td>
-            <button type="button" class="btn btn-outline-primary" (click)="deleteOrder(o.OrderId)">
+            <button type="button" class="btn btn-outline-danger" (click)="deleteOrder(o.OrderId)">
+              <i class="fas fa-trash-alt red"></i>
+            </button>
+            <button type="button" class="btn btn-outline-primary" (click)="editOrder(o.OrderId)">
               <i class="fas fa-trash-alt red"></i>
             </button>
           </td>
@@ -41,7 +44,7 @@
               <input
                 required
                 type="text"
-                [(ngModel)]="order.fullName"
+                [(ngModel)]="order.CustomerFullName"
                 name="customerFullName"
                 #fullName="ngModel"
                 class="form-control"
@@ -58,7 +61,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.streetWithHouseNumber"
+                    [(ngModel)]="order.StreetWithHouseNumber"
                     name="StreetWithHouseNumber"
                     #StreetWithHouseNumber="ngModel"
                     class="form-control"
@@ -73,7 +76,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.postCode"
+                    [(ngModel)]="order.Postcode"
                     name="postCode"
                     #postCode="ngModel"
                     class="form-control"
@@ -89,7 +92,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.city"
+                    [(ngModel)]="order.City"
                     name="city"
                     #city="ngModel"
                     class="form-control"
@@ -109,7 +112,7 @@
                   <label for="vehicleIdentNr">Fahrzeug-Ident-Nr</label>
                   <input
                     type="text"
-                    [(ngModel)]="order.vehicleIdentNr"
+                    [(ngModel)]="order.VehicleIdentNr"
                     name="vehicleIdentNr"
                     #vehicleIdentNr="ngModel"
                     class="form-control"
@@ -123,7 +126,7 @@
                   <label for="currentPlatte">Kennzeichen des Fahrzeuges</label>
                   <input
                     type="text"
-                    [(ngModel)]="order.currentPlatte"
+                    [(ngModel)]="order.CurrentPlatte"
                     name="currentPlatte"
                     #currentPlatte="ngModel"
                     class="form-control"
@@ -161,7 +164,7 @@
                   <label for="wishPlatte"></label>
                   <input
                     type="text"
-                    [(ngModel)]="order.wishPlatte"
+                    [(ngModel)]="order.WishPlatte"
                     name="wishPlatte"
                     #wishPlatte="ngModel"
                     class="form-control"
@@ -204,7 +207,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.evb"
+                    [(ngModel)]="order.Evb"
                     name="evb"
                     #evb="ngModel"
                     class="form-control"
@@ -223,7 +226,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.ContactPhone"
+                    [(ngModel)]="order.CustomerTelefon"
                     name="CustomerTelefon"
                     #ContactPhone="ngModel"
                     class="form-control"
@@ -245,7 +248,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.iban"
+                    [(ngModel)]="order.CustomerIban"
                     name="CustomerIban"
                     #IBAN="ngModel"
                     class="form-control"
@@ -264,7 +267,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.BIC"
+                    [(ngModel)]="order.CustomerBic"
                     name="CustomerBic"
                     #BIC="ngModel"
                     class="form-control"
@@ -280,7 +283,7 @@
                   <input
                     required
                     type="text"
-                    [(ngModel)]="order.bankName"
+                    [(ngModel)]="order.CustomerBankName"
                     name="CustomerBankName"
                     #bankName="ngModel"
                     class="form-control"
@@ -299,7 +302,7 @@
               <div class="col-sm-2">
                 <input type="number"
                        required
-                       [(ngModel)]="order.vorauslegteKosten"
+                       [(ngModel)]="order.VorauslegteKosten"
                        name="vorauslegteKosten"
                        #vorauslegteKosten="ngModel"
                        class="form-control"
@@ -313,7 +316,7 @@
               <div class="col-sm-2">
                 <input type="number"
                        required
-                       [(ngModel)]="order.zulassungsserviceKosten"
+                       [(ngModel)]="order.ZulassungsserviceKosten"
                        name="zulassungsserviceKosten"
                        #zulassungsserviceKosten="ngModel"
                        class="form-control"
@@ -327,15 +330,15 @@
                 <span class="mr-3 font-weight-bold">Kennzeichen:</span>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input"
-                         [(ngModel)]="order.kennzechenKosten"
-                         name="kennzechenKosten"
+                         [(ngModel)]="order.IsKennzechenKosten"
+                         name="IsKennzechenKosten"
                          type="radio" id="kennzeichenJa" value="1">
                   <label class="form-check-label" for="kennzeichenJa">ja</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input"
-                         [(ngModel)]="order.kennzechenKosten"
-                         name="kennzechenKosten"
+                         [(ngModel)]="order.IsKennzechenKosten"
+                         name="IsKennzechenKosten"
                          type="radio" id="kennzeichenNein" value="0">
                   <label class="form-check-label" for="kennzeichenNein">nein</label>
                 </div>
@@ -348,12 +351,18 @@
             <!--</p></div>-->
             <div class="row mt-lg-5">
               <div class="col-md-12">
-                <button type="submit" class="btn btn-danger btn-lg float-right">Erstelle Dokumente</button>
+                <button
+                  [disabled]="( !f.controls.kennzechenKosten?.value ||
+                                !f.controls.zulassungsserviceKosten?.value ||
+                                !f.controls.vorauslegteKosten?.value)"
+                  (click)="makeInvoice(f)"
+                  type="button"
+                  class="btn btn-warning btn-lg float-right ">
+                  Rechnung
+                </button>
+                <button type="submit" class="btn btn-danger btn-lg float-right mr-5">Vollmacht mit SEPA</button>
               </div>
-              <!-- /.col-md-6 -->
             </div>
-            <!-- /.row -->
-
           </form>
         </div>
       </div>

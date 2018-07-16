@@ -27,13 +27,16 @@ export class InvoiceComponent {
 
   submit(form) {
     this.showSpinner = true;
+    if(this.orderService.form)
     this.orderService.createOrder(form)
       .subscribe((order: any) => {
         this.orderService.order = {orderId: order.orderId};
         this.callInvoicePdf.emit();
         this.showSpinner = false;
+        this.order['OrderId'] = order.orderId;
+        this.orderService.form = this.order;
       });
-    this.orderService.form = this.order;
+
     console.log(form);
     // console.log(form);
   }
@@ -59,5 +62,18 @@ export class InvoiceComponent {
 
         console.log('deletedOrder', order);
       });
+  }
+
+  editOrder(OrderId: any) {
+    this.orderService.getOrderById(OrderId)
+      .subscribe((order: any) => {
+        this.order = order;
+        this.showOrderForm = true;
+        console.log('order to edit', order);
+      });
+  }
+
+  makeInvoice(form) {
+    console.log('invoice click----------------', form);
   }
 }
