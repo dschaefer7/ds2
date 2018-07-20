@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AuthService} from './services/auth.service';
 import {SpinnerService} from './components/spinner/spinner.service';
 import fontawesome from '@fortawesome/fontawesome';
-import faSpinner from '@fortawesome/fontawesome-free-solid/';
+import faSpinner, {faPencilAlt} from '@fortawesome/fontawesome-free-solid/';
 import faTrashAlt from '@fortawesome/fontawesome-free-solid/';
 
 @Component({
@@ -20,6 +20,7 @@ export class AppComponent {
   constructor(private auth: AuthService, public spinner: SpinnerService) {
     fontawesome.library.add(faSpinner);
     fontawesome.library.add(faTrashAlt);
+    fontawesome.library.add(faPencilAlt);
   }
 
 

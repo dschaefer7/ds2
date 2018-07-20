@@ -19,12 +19,23 @@ export class InvoicePdfComponent {
               private invoiceService: InvoiceService,
               private orderService: OrderService) {
     // this.pdfSrc = auth.API_URL + '/invoice';
-    console.log('this.orderService.order', this.orderService.order);
-    invoiceService.createInvoice(this.orderService.order)
-      .subscribe((data: any) => {
-        console.log('data', data);
-        this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
-      });
+    // console.log('this.orderService.order', this.orderService.order);
+    // console.log('this.orderService.form', this.orderService.form);
+
+    if (this.orderService.order.hasOwnProperty('invoice')) {
+      console.log('print invoice');
+      invoiceService.createInvoice(this.orderService.order)
+        .subscribe((data: any) => {
+          console.log('data', data);
+          this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
+        });
+    } else {
+      invoiceService.createVollmacht(this.orderService.order)
+        .subscribe((data: any) => {
+          console.log('data', data);
+          this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
+        });
+    }
   }
 
 
@@ -73,12 +84,20 @@ export class InvoicePdfComponent {
       showModal: true,
       token: this.auth.token
     });
-
     // const blob = this.b64toBlob(this.pdfScr2, 'application/pdf');
     // let blob = b64toBlob(this.pdfScr2, 'application/pdf');
     // let fileUrl = window.URL.createObjectURL(blob);
     // window.frames['my-frame'].src = fileUrl;
     // window.frames['my-frame'].print();
+  }
+
+  printInvoicePdf() {
+    printJS({
+      printable: this.auth.API_URL + '/invoice/zopa',
+      type: 'pdf',
+      showModal: true,
+      token: this.auth.token
+    });
   }
 
   backToInvoiceComponent() {

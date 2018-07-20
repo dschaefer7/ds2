@@ -27,19 +27,31 @@ export class InvoiceComponent {
 
   submit(form) {
     this.showSpinner = true;
-    if(this.orderService.form)
-    this.orderService.createOrder(form)
-      .subscribe((order: any) => {
-        this.orderService.order = {orderId: order.orderId};
-        this.callInvoicePdf.emit();
-        this.showSpinner = false;
-        this.order['OrderId'] = order.orderId;
-        this.orderService.form = this.order;
-      });
+    if (this.orderService.form) {
+      console.log('edit order-->', this.order);
+      this.orderService.editOrder(this.order)
+        .subscribe((result: any) => {
+          this.orderService.order = {orderId: this.order.OrderId};
+          this.showSpinner = false;
+          // this.order['OrderId'] = form.orderId;
+          this.orderService.form = this.order;
+          this.callInvoicePdf.emit();
+        });
+    } else {
+      console.log('create order-->', this.order);
+      this.orderService.createOrder(form)
+        .subscribe((order: any) => {
+          this.orderService.order = {orderId: order.orderId};
 
-    console.log(form);
-    // console.log(form);
+          this.showSpinner = false;
+          this.order['OrderId'] = order.orderId;
+          this.orderService.form = this.order;
+
+          this.callInvoicePdf.emit();
+        });
+    }
   }
+
 
   showAllOrders() {
     this.showSpinner = true;
@@ -53,6 +65,7 @@ export class InvoiceComponent {
       });
   }
 
+
   deleteOrder(orderId) {
     this.orderService.deleteOrder(orderId)
       .subscribe((order: any) => {
@@ -64,16 +77,25 @@ export class InvoiceComponent {
       });
   }
 
-  editOrder(OrderId: any) {
+  loadOrderToEdit(OrderId: any) {
     this.orderService.getOrderById(OrderId)
-      .subscribe((order: any) => {
-        this.order = order;
+      .subscribe((orderFromDb: any) => {
+        this.order = orderFromDb;
         this.showOrderForm = true;
-        console.log('order to edit', order);
+        console.log('loadOrderToEdit', orderFromDb);
       });
   }
 
   makeInvoice(form) {
     console.log('invoice click----------------', form);
+    this.orderService.editOrder(this.order)
+      .subscribe((result: any) => {
+        this.orderService.order = {orderId: this.order.OrderId};
+        this.orderService.order['invoice'] = true;
+        this.showSpinner = false;
+        // this.order['OrderId'] = form.orderId;
+        this.orderService.form = this.order;
+        this.callInvoicePdf.emit();
+      });
   }
 }

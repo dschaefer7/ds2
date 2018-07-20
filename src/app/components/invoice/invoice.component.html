@@ -5,7 +5,7 @@
       <button (click)="showAllOrders()" class="btn btn-success btn-lg align-left">Alle Bestellungen</button>
     </div>
     <div *ngIf="!showOrderForm" class="col-md-10">
-      <table class="table">
+      <table class="table table-striped">
         <thead>
         <tr>
           <th>BestellNr</th>
@@ -19,11 +19,11 @@
           <td>{{o.CustomerFullName}}</td>
           <td>{{o.DateCreated | date}}</td>
           <td>
-            <button type="button" class="btn btn-outline-danger" (click)="deleteOrder(o.OrderId)">
+            <button type="button" class="btn btn-outline-danger mr-1" (click)="deleteOrder(o.OrderId)">
               <i class="fas fa-trash-alt red"></i>
             </button>
-            <button type="button" class="btn btn-outline-primary" (click)="editOrder(o.OrderId)">
-              <i class="fas fa-trash-alt red"></i>
+            <button type="button" class="btn btn-outline-primary" (click)="loadOrderToEdit(o.OrderId)">
+              <i class="fas fa-pencil-alt"></i>
             </button>
           </td>
         </tr>
@@ -38,6 +38,23 @@
       <div class="row">
         <div class="col-md-12">
           <form #f="ngForm" (ngSubmit)="submit(f.value)">
+
+            <div class="form-group" *ngIf="order.OrderId">
+              <label for="OrderId">Bestellung Nr:</label>
+              <input
+                readonly
+                type="text"
+                [(ngModel)]="order.OrderId"
+                name="OrderId"
+                #fullName="ngModel"
+                class="form-control"
+                id="OrderId"
+                aria-describedby="OrderId"
+                placeholder="">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            </div>
+
+
             <!--Address-->
             <div class="form-group">
               <label for="customerFullName">Name / Vorname oder Firma (zukünftige Halterin/Halter) Vollmachtgeber</label>
@@ -352,15 +369,19 @@
             <div class="row mt-lg-5">
               <div class="col-md-12">
                 <button
-                  [disabled]="( !f.controls.kennzechenKosten?.value ||
+                  [disabled]=" !f.controls.IsKennzechenKosten?.value ||
                                 !f.controls.zulassungsserviceKosten?.value ||
-                                !f.controls.vorauslegteKosten?.value)"
-                  (click)="makeInvoice(f)"
+                                !f.controls.vorauslegteKosten?.value"
+                  (click)="makeInvoice(f.value)"
                   type="button"
-                  class="btn btn-warning btn-lg float-right ">
+                  class="btn btn-warning btn-lg float-right">
                   Rechnung
                 </button>
-                <button type="submit" class="btn btn-danger btn-lg float-right mr-5">Vollmacht mit SEPA</button>
+                <button type="submit"
+                        [disabled]="!f.valid"
+                        class="btn btn-danger btn-lg float-right mr-5">
+                  Vollmacht mit SEPA
+                </button>
               </div>
             </div>
           </form>

@@ -15,8 +15,13 @@ export class InvoiceService {
   }
 
 
-  createInvoice(orderData: Order) {
+  createVollmacht(orderData: Order) {
     return this.http.post(this.API_URL + '/invoice', orderData);
+  }
+
+
+  createInvoice(orderData: Order) {
+    return this.http.post(this.API_URL + '/invoice/zopa', orderData);
   }
 
 

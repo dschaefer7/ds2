@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AuthService} from './auth.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Order} from '../model/Order';
 
 @Injectable({
@@ -30,7 +30,14 @@ export class OrderService {
   }
 
   deleteOrder(orderId) {
-    return this.http.delete(this.API_URL + '/order/' + orderId);
+    const headers = new HttpHeaders({'X-HTTP-Method-Override': 'DELETE'});
+    return this.http.post(this.API_URL + '/order/' + orderId, null,{ headers: headers});
+  }
+
+  editOrder(orderData) {
+    console.log('orderData->', orderData);
+    const headers = new HttpHeaders({'X-HTTP-Method-Override': 'PUT'});
+    return this.http.post(this.API_URL + '/order', orderData,{ headers: headers} );
   }
 
 
