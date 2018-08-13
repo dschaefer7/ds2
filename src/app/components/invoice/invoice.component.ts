@@ -27,7 +27,8 @@ export class InvoiceComponent {
 
   submit(form) {
     this.showSpinner = true;
-    if (this.orderService.form) {
+    if (this.order.OrderId) {
+    //if (this.orderService.form) {
       console.log('edit order-->', this.order);
       this.orderService.editOrder(this.order)
         .subscribe((result: any) => {
@@ -82,6 +83,7 @@ export class InvoiceComponent {
       .subscribe((orderFromDb: any) => {
         this.order = orderFromDb;
         this.showOrderForm = true;
+        // this.orderService.form = orderFromDb;
         console.log('loadOrderToEdit', orderFromDb);
       });
   }
