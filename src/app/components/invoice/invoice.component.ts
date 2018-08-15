@@ -28,7 +28,6 @@ export class InvoiceComponent {
   submit(form) {
     this.showSpinner = true;
     if (this.order.OrderId) {
-    //if (this.orderService.form) {
       console.log('edit order-->', this.order);
       this.orderService.editOrder(this.order)
         .subscribe((result: any) => {
@@ -79,12 +78,14 @@ export class InvoiceComponent {
   }
 
   loadOrderToEdit(OrderId: any) {
+    this.showSpinner = true;
     this.orderService.getOrderById(OrderId)
       .subscribe((orderFromDb: any) => {
         this.order = orderFromDb;
         this.showOrderForm = true;
         // this.orderService.form = orderFromDb;
         console.log('loadOrderToEdit', orderFromDb);
+        this.showSpinner = false;
       });
   }
 
@@ -98,6 +99,18 @@ export class InvoiceComponent {
         // this.order['OrderId'] = form.orderId;
         this.orderService.form = this.order;
         this.callInvoicePdf.emit();
+      });
+  }
+
+  copyOrderToCreateNew(OrderId: any) {
+    this.orderService.getOrderById(OrderId)
+      .subscribe((orderFromDb: any) => {
+        delete orderFromDb.OrderId;
+        this.order = orderFromDb;
+        this.showOrderForm = true;
+        // this.orderService.form = orderFromDb;
+        console.log('createNewFromExist', orderFromDb);
+        this.showSpinner = false;
       });
   }
 }

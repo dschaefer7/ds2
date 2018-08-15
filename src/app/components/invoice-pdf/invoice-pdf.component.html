@@ -1,12 +1,27 @@
-<button type="button" class="btn btn-danger btn-lg" (click)="backToInvoiceComponent()">
-  Zurück
-</button>
+<div id="wrapper">
+  <nav id="sidebar">
+    <ul class="list-unstyled components">
+      <li>
+        <button type="button" class="btn btn-success btn-lg w-100 mb-lg-1" (click)="printPdf()">
+          Print PDF
+        </button>
+      </li>
+      <li>
+        <button type="button" class="btn btn-danger btn-lg w-100 " (click)="backToInvoiceComponent()">
+          Zurück
+        </button>
+      </li>
 
-<button type="button" class="btn btn-danger btn-lg" (click)="printPdf()">
-  Print PDF
-</button>
+    </ul>
+  </nav>
 
-<pdf-viewer id="viewer" [src]="pdfSrc"></pdf-viewer>
+  <div id="content">
+    <pdf-viewer id="viewer" [src]="pdfSrc"></pdf-viewer>
+  </div>
+
+</div>
+
+<app-spinner [name]="spinner" [(show)]="showSpinner" class="spinner"></app-spinner>
 
 
 

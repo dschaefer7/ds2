@@ -2,10 +2,10 @@
   <nav id="sidebar">
     <ul class="list-unstyled components">
       <li class="mt-lg-5">
-        <button (click)="showAllOrders()" class="btn btn-success btn-lg align-left">Alle Bestellungen</button>
+        <button (click)="showAllOrders()" class="btn btn-success w-100">Alle Bestellungen</button>
       </li>
-      <li class="mt-lg-1">
-        <button (click)="showAllOrders()" class="btn btn-success btn-lg align-left">Alle Bestellungen</button>
+      <li class="mt-lg-2" *ngIf="!showOrderForm">
+        <button (click)="showOrderForm=true" class="btn btn-danger w-100">Zurück</button>
       </li>
     </ul>
   </nav>
@@ -32,8 +32,11 @@
               <button type="button" class="btn btn-outline-danger mr-1" (click)="deleteOrder(o.OrderId)">
                 <i class="fas fa-trash-alt red"></i>
               </button>
-              <button type="button" class="btn btn-outline-primary" (click)="loadOrderToEdit(o.OrderId)">
+              <button type="button" class="btn btn-outline-primary mr-3" (click)="loadOrderToEdit(o.OrderId)">
                 <i class="fas fa-pencil-alt"></i>
+              </button>
+              <button type="button" class="btn btn-outline-success" (click)="copyOrderToCreateNew(o.OrderId)">
+                <i class="fas fa-plus-circle green"></i>
               </button>
             </td>
           </tr>
@@ -232,6 +235,8 @@
                     <label for="evb">EVB Nr.</label>
                     <input
                       required
+                      minlength="7"
+                      maxlength="7"
                       type="text"
                       [(ngModel)]="order.Evb"
                       name="evb"
@@ -241,6 +246,16 @@
                       aria-describedby="evb"
                       placeholder="">
                     <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                  </div>
+                  <div *ngIf="evb.invalid && (evb.dirty || evb.touched)"
+                       class="alert alert-danger">
+
+                    <div *ngIf="evb.errors.required">
+                      EVb ist erforderlich.
+                    </div>
+                    <div *ngIf="evb.errors.minlength">
+                      EVB ist nicht 7 Zeichen lang.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -273,6 +288,7 @@
                     <label for="CustomerIban">IBAN</label>
                     <input
                       required
+                      iban
                       type="text"
                       [(ngModel)]="order.CustomerIban"
                       name="CustomerIban"
@@ -281,6 +297,22 @@
                       id="CustomerIban"
                       aria-describedby="IBAN"
                       placeholder="">
+
+                    <div *ngIf="IBAN.invalid && (IBAN.dirty || IBAN.touched)"
+                         class="alert alert-danger">
+
+                      <div *ngIf="IBAN.errors.required">
+                        IBAN ist erforderlich.
+                      </div>
+                      <div *ngIf="IBAN.errors.minlength">
+                        IBAN ist nicht 22 Zeichen lang.
+                      </div>
+                      <div *ngIf="IBAN.errors.Iban">
+                        IBAN ist ungültig.
+                      </div>
+                    </div>
+
+
                     <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                   </div>
                 </div>
@@ -380,14 +412,14 @@
                   <button
                     [disabled]=" !f.controls.IsKennzechenKosten?.value ||
                                 !f.controls.zulassungsserviceKosten?.value ||
-                                !f.controls.vorauslegteKosten?.value"
+                                !f.controls.vorauslegteKosten?.value || !f.valid"
                     (click)="makeInvoice(f.value)"
                     type="button"
                     class="btn btn-warning btn-lg float-right">
                     Rechnung
                   </button>
                   <button type="submit"
-                          [disabled]="!f.valid"
+                          [disabled]="!f.valid && (!f.dirty || !f.touched)"
                           class="btn btn-danger btn-lg float-right mr-5">
                     Vollmacht mit SEPA
                   </button>

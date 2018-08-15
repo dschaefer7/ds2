@@ -1,13 +1,26 @@
 .wrapper {
   display: flex;
   width: 100%;
-  align-items: stretch;
 }
+
+#sidebar{
+  position: fixed;
+  width: 200px;
+  height: 100vh;
+  padding: 20px;
+  background: #d1d1d1;
+  color: #fff;
+  transition: all 0.3s;
+}
+
 #content {
-  width: 100%;
+  width: calc(100% - 200px);
   padding: 20px;
   min-height: 100vh;
   transition: all 0.3s;
+  position: absolute;
+  top:0;
+  right: 0;
 }
 
 .head1{
@@ -17,6 +30,10 @@
 
 .red{
   color: red;
+}
+
+.green{
+  color: green;
 }
 button:hover{
   cursor: pointer;

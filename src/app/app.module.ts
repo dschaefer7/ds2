@@ -12,6 +12,7 @@ import {AuthGuard} from './auth/guards/auth.guard';
 import {SpinnerComponent} from './components/spinner/spinner.component';
 import { InvoicePdfComponent } from './components/invoice-pdf/invoice-pdf.component';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
+import {IbanValidator} from './validatators/iban.validator';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {PdfViewerModule} from 'ng2-pdf-viewer';
     LoginComponent,
     InvoiceComponent,
     SpinnerComponent,
-    InvoicePdfComponent
+    InvoicePdfComponent,
+    IbanValidator
   ],
   imports: [
     BrowserModule,

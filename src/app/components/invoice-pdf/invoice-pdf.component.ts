@@ -3,6 +3,7 @@ import printJS from 'print-js';
 import {AuthService} from '../../services/auth.service';
 import {InvoiceService} from '../../services/invoice.service';
 import {OrderService} from '../../services/order.service';
+import {SpinnerService} from '../spinner/spinner.service';
 
 @Component({
   selector: 'app-invoice-pdf',
@@ -14,26 +15,31 @@ export class InvoicePdfComponent {
   @Output() callInvoiceForm = new EventEmitter();
 
   pdfSrc: any; // = 'http://localhost:10270/api/invoice';
+  showSpinner = false;
 
   constructor(private auth: AuthService,
               private invoiceService: InvoiceService,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              public spinner: SpinnerService) {
     // this.pdfSrc = auth.API_URL + '/invoice';
     // console.log('this.orderService.order', this.orderService.order);
     // console.log('this.orderService.form', this.orderService.form);
 
+    this.showSpinner = true;
     if (this.orderService.order.hasOwnProperty('invoice')) {
       console.log('print invoice');
       invoiceService.createInvoice(this.orderService.order)
         .subscribe((data: any) => {
           console.log('data', data);
           this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
+          this.showSpinner = false;
         });
     } else {
       invoiceService.createVollmacht(this.orderService.order)
         .subscribe((data: any) => {
           console.log('data', data);
           this.pdfSrc = 'data:application/pdf;base64,' + data.pdf;
+          this.showSpinner = false;
         });
     }
   }

@@ -28,6 +28,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
+    "iban": "0.0.10",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
     "ng2-pdf-viewer": "^5.1.0",
